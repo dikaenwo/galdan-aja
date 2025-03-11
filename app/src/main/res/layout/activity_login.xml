@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".LoginActivity">
+
+    <TextView
+        android:id="@+id/textTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="20dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Masuk ke akun yang telah terdaftar"
+        android:textSize="32sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextTextEmailAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/custom_input_auth"
+        android:ems="10"
+        android:fontFamily="@font/poppins_regular"
+        android:hint="dika@gmail.com"
+        android:inputType="textEmailAddress"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="16dp"
+        android:textColor="#91958E"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textTitle" />
+
+    <EditText
+        android:id="@+id/editTextTextPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/custom_input_auth"
+        android:ems="10"
+        android:fontFamily="@font/poppins_regular"
+        android:inputType="textPassword"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="16dp"
+        android:text="hahahahahhahaha"
+        android:textColor="#91958E"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress" />
+
+    <TextView
+        android:id="@+id/textViewForgotPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="176dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="177dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Lupa kata sandi"
+        android:textColor="@color/green700"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="290dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/custom_button"
+        android:fontFamily="@font/poppins_bold"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="16dp"
+        android:stateListAnimator="@null"
+        android:text="Masuk"
+
+        android:textAllCaps="false"
+        android:textColor="@color/typhographySecondaryGray"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewForgotPassword" />
+
+    <TextView
+        android:id="@+id/tvDontHvAcc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="84dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/poppins_regular"
+        android:text="Belum punya akun?"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toStartOf="@+id/tvDaftar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button" />
+
+    <TextView
+        android:id="@+id/tvDaftar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="84dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Daftar"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvDontHvAcc"
+        app:layout_constraintTop_toBottomOf="@+id/button" />
+</androidx.constraintlayout.widget.ConstraintLayout>
