@@ -42,25 +42,48 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textTitle" />
 
-    <EditText
+    <RelativeLayout
         android:id="@+id/editTextTextPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        android:background="@drawable/custom_input_auth"
-        android:ems="10"
-        android:fontFamily="@font/poppins_regular"
-        android:inputType="textPassword"
-        android:paddingHorizontal="12dp"
-        android:paddingVertical="16dp"
-        android:text="hahahahahhahaha"
-        android:textColor="#91958E"
-        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress">
+
+        <EditText
+            android:id="@+id/editTextTextPasswor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_input_auth"
+            android:ems="10"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="Kata Sandi"
+            android:inputType="textPassword"
+            android:paddingStart="12dp"
+            android:paddingTop="16dp"
+            android:paddingEnd="50dp"
+            android:paddingBottom="16dp"
+            android:textColor="#91958E"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:id="@+id/ivTogglePassword"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="12dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/ic_eye_closed"
+            tools:ignore="ContentDescription" />
+
+    </RelativeLayout>
+
+
 
     <TextView
         android:id="@+id/textViewForgotPassword"
@@ -82,7 +105,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="290dp"
+        android:layout_marginTop="250dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/custom_button"
         android:fontFamily="@font/poppins_bold"
