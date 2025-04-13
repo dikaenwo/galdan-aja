@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="@android:color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Toolbar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="12dp"
+        android:weightSum="3"
+        android:layout_marginTop="20dp">
+
+        <!-- Tombol Back -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_gravity="start"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="5dp">
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@drawable/arrow_kiri"
+                android:layout_marginEnd="3dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Back"
+                android:fontFamily="@font/poppins_bold"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <!-- Judul Tengah -->
+        <TextView
+            android:layout_width="195dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:ellipsize="end"
+            android:fontFamily="@font/poppins_bold"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="Change Payment"
+            android:textSize="17sp" />
+
+        <!-- Tombol Edit -->
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:text="Edit"
+            android:textColor="#54A312"
+            android:fontFamily="@font/poppins_bold"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <!-- Daftar alamat -->
+    <RadioGroup
+        android:id="@+id/radioGroupAlamat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!--BCA-->
+        <LinearLayout
+            android:id="@+id/bca"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="12dp"
+            android:background="@drawable/bgradio_ubahpembayaran"
+            android:layout_marginBottom="8dp">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/bca"
+                android:layout_marginEnd="12dp"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Bank BCA"
+                android:textColor="#000000"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="15sp" />
+
+            <RadioButton
+                android:id="@+id/radio_bca"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@drawable/radioselect_ubahalamat" />
+        </LinearLayout>
+
+        <!--BNI-->
+        <LinearLayout
+            android:id="@+id/bni"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="12dp"
+            android:background="@drawable/bgradio_ubahpembayaran"
+            android:layout_marginBottom="8dp">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/bni"
+                android:layout_marginEnd="12dp"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Bank BNI"
+                android:textColor="#000000"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="15sp"/>
+
+            <RadioButton
+                android:id="@+id/radio_bni"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@drawable/radioselect_ubahalamat" />
+        </LinearLayout>
+
+        <!--BRI-->
+        <LinearLayout
+            android:id="@+id/bri"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="12dp"
+            android:background="@drawable/bgradio_ubahpembayaran"
+            android:layout_marginBottom="8dp">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/bri"
+                android:layout_marginEnd="12dp"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Bank BRI"
+                android:textColor="#000000"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="15sp" />
+
+            <RadioButton
+                android:id="@+id/radio_bri"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@drawable/radioselect_ubahalamat" />
+        </LinearLayout>
+
+        <!--BSI-->
+        <LinearLayout
+            android:id="@+id/bsi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="12dp"
+            android:background="@drawable/bgradio_ubahpembayaran"
+            android:layout_marginBottom="8dp">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/bsi"
+                android:layout_marginEnd="12dp"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Bank BSI"
+                android:textColor="#000000"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="15sp" />
+
+            <RadioButton
+                android:id="@+id/radio_bsi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@drawable/radioselect_ubahalamat" />
+        </LinearLayout>
+
+        <!--Dana-->
+        <LinearLayout
+            android:id="@+id/dana"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="12dp"
+            android:background="@drawable/bgradio_ubahpembayaran"
+            android:layout_marginBottom="8dp">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/dana"
+                android:layout_marginEnd="12dp"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Dompet Digital DANA"
+                android:textColor="#000000"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="15sp" />
+
+            <RadioButton
+                android:id="@+id/radio_dana"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@drawable/radioselect_ubahalamat" />
+        </LinearLayout>
+
+        <!--Gpay-->
+        <LinearLayout
+            android:id="@+id/gopay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="12dp"
+            android:background="@drawable/bgradio_ubahpembayaran"
+            android:layout_marginBottom="8dp">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/gopay"
+                android:layout_marginEnd="12dp"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Dompet Digital Gopay"
+                android:textColor="#000000"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="15sp" />
+
+            <RadioButton
+                android:id="@+id/radio_gopay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@drawable/radioselect_ubahalamat" />
+        </LinearLayout>
+
+        <!--COD-->
+        <LinearLayout
+            android:id="@+id/cod"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="12dp"
+            android:background="@drawable/bgradio_ubahpembayaran"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Cash on Delivery (COD)"
+                android:textColor="#000000"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="15sp" />
+
+            <RadioButton
+                android:id="@+id/radio_cod"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@drawable/radioselect_ubahalamat" />
+        </LinearLayout>
+
+    </RadioGroup>
+</LinearLayout>

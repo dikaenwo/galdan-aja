@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <!-- Tombol Close -->
+        <ImageView
+            android:id="@+id/btn_close"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/silang"
+            android:contentDescription="Close Drawer"
+            android:layout_gravity="start" />
+
+        <!-- Profile -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="78dp"
+                android:layout_height="78dp"
+                android:src="@drawable/profile"
+                android:scaleType="centerCrop"
+                android:layout_marginEnd="16dp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Daniel Jones"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="daniel.jones@example.com"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textSize="12sp"
+                    android:textColor="#888888" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="⭐ Premium"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textSize="12sp"
+                    android:textColor="#F3A712"
+                    android:layout_marginTop="0dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#EEEEEE"
+            android:layout_marginVertical="16dp" />
+
+        <!-- Menu Items -->
+        <LinearLayout
+            android:id="@+id/nav_account"
+            style="@style/DrawerMenuItem">
+            <ImageView
+                style="@style/DrawerMenuIcon"
+                android:src="@drawable/akun" />
+            <TextView
+                style="@style/DrawerMenuText"
+                android:text="My Account"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="15sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/nav_orders"
+            style="@style/DrawerMenuItem">
+            <ImageView
+                style="@style/DrawerMenuIcon"
+                android:src="@drawable/list" />
+            <TextView
+                style="@style/DrawerMenuText"
+                android:text="My Orders"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="15sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/nav_payment"
+            style="@style/DrawerMenuItem">
+            <ImageView
+                style="@style/DrawerMenuIcon"
+                android:src="@drawable/wallet" />
+            <TextView
+                style="@style/DrawerMenuText"
+                android:text="Payment"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="15sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/nav_addresses"
+            style="@style/DrawerMenuItem">
+            <ImageView
+                style="@style/DrawerMenuIcon"
+                android:src="@drawable/location" />
+            <TextView
+                style="@style/DrawerMenuText"
+                android:text="Addresses"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="15sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/nav_subscription"
+            style="@style/DrawerMenuItem">
+            <ImageView
+                style="@style/DrawerMenuIcon"
+                android:src="@drawable/subs" />
+            <TextView
+                style="@style/DrawerMenuText"
+                android:text="Subscription"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="15sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/nav_settings"
+            style="@style/DrawerMenuItem">
+            <ImageView
+                style="@style/DrawerMenuIcon"
+                android:src="@drawable/setting2" />
+            <TextView
+                style="@style/DrawerMenuText"
+                android:text="Settings"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="15sp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
