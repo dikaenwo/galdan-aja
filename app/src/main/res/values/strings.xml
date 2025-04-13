@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Galdan Aja</string>
+    <string name="title_activity_list_galdan">ListGaldanActivity</string>
+    <string name="title_activity_spalsh_screen">SpalshScreenActivity</string>
+    <string-array name="periode">
+        <item>Bulanan</item>
+        <item>Mingguan</item>
+        <item>Harian</item>
+    </string-array>
+
 </resources>

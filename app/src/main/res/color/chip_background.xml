@@ -1,0 +1,4 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_checked="true" android:color="#D0F0C0" /> <!-- Hijau muda saat aktif -->
+    <item android:color="#FFFFFF" /> <!-- Putih saat tidak aktif -->
+</selector>
