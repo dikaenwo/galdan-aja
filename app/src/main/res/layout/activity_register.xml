@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".LoginActivity">
+    tools:context=".RegisterActivity">
 
     <TextView
         android:id="@+id/textTitle"
@@ -15,7 +15,7 @@
         android:layout_marginTop="60dp"
         android:layout_marginEnd="20dp"
         android:fontFamily="@font/poppins_bold"
-        android:text="Masuk ke akun yang telah terdaftar"
+        android:text="Daftar Akun Baru"
         android:textSize="32sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -23,7 +23,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/emailLogin"
+        android:id="@+id/emailRegister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -51,10 +51,10 @@
         android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailLogin">
+        app:layout_constraintTop_toBottomOf="@+id/emailRegister">
 
         <EditText
-            android:id="@+id/passwordLogin"
+            android:id="@+id/passwordRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/custom_input_auth"
@@ -84,24 +84,23 @@
     </RelativeLayout>
 
 
-
-    <TextView
-        android:id="@+id/textViewForgotPassword"
+    <CheckBox
+        android:id="@+id/checkBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="176dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="177dp"
-        android:fontFamily="@font/poppins_bold"
-        android:text="Lupa kata sandi"
-        android:textColor="@color/green700"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/poppins_regular"
+        android:padding="16dp"
+        android:text="I aggree team &amp; conditions"
+        android:textColor="@color/typhography4"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.135"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnLogin"
+        android:id="@+id/btnRegister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -112,14 +111,14 @@
         android:paddingHorizontal="12dp"
         android:paddingVertical="16dp"
         android:stateListAnimator="@null"
-        android:text="Masuk"
+        android:text="Buat Akun"
         android:enabled="false"
         android:textAllCaps="false"
         android:textColor="@color/typhographySecondaryGray"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewForgotPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
 
     <TextView
         android:id="@+id/tvDontHvAcc"
@@ -128,22 +127,22 @@
         android:layout_marginStart="84dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/poppins_regular"
-        android:text="Belum punya akun?"
+        android:text="Sudah punya akun?"
         android:textSize="15sp"
-        app:layout_constraintEnd_toStartOf="@+id/tvDaftar"
+        app:layout_constraintEnd_toStartOf="@+id/tvMasuk"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
+        app:layout_constraintTop_toBottomOf="@+id/btnRegister" />
 
     <TextView
-        android:id="@+id/tvDaftar"
+        android:id="@+id/tvMasuk"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="84dp"
         android:fontFamily="@font/poppins_bold"
-        android:text="Daftar"
+        android:text="Masuk"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tvDontHvAcc"
-        app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
+        app:layout_constraintTop_toBottomOf="@+id/btnRegister" />
 </androidx.constraintlayout.widget.ConstraintLayout>

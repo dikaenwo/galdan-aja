@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "518827778187",
+    "project_id": "galdanaja",
+    "storage_bucket": "galdanaja.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:518827778187:android:07ec2c96bdfe793a8bf48e",
+        "android_client_info": {
+          "package_name": "com.example.galdanaja"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXFNY19_ymcC1FvAIpr79FpBm8l6GWDng"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
