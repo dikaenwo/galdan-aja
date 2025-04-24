@@ -1,4 +1,17 @@
 <resources>
     <string name="app_name">Galdan Aja</string>
     <string name="title_activity_splash_screen">SplashScreen</string>
+    <string name="onboarding_1">Selamat datang di aplikasi Galdan Aja</string>
+    <string name="sub_onboarding1">Eksplor Jajanan yang dijual oleh Mahsiswa PNUP ✨ </string>
+
+    <string name="onboarding_2">Kami siap mengantar pesananmu</string>
+    <string name="sub_onboarding2">Gak pake teleportasi, tapi makanan sampe sebelum kamu sempet bilang laper 😋</string>
+
+    <string name="onboarding_3">Bestie kamu di jam-jam rawan laper 🍕👀</string>
+    <string name="sub_onboarding3">Bukan cuma temen curhat, kita juga temen makan.</string>
+
+    <string name="onboarding_4">Gabung sekarang, biar tiap jam rawan laper kamu punya solusi 🍕</string>
+    <string name="default_web_client_id">518827778187-7lsbvr917pie168m24onf8gtku2giaed.apps.googleusercontent.com</string>
+
+
 </resources>

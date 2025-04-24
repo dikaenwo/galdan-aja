@@ -25,7 +25,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:fontFamily="@font/poppins_bold"
-        android:text="Selamat datang di aplikasi Galdan Aja"
+        android:text="@string/onboarding_1"
         android:textAlignment="center"
         android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -39,7 +39,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="20dp"
-        android:text="You know, this app is edible meaning you can eat it!"
+        android:text="@string/sub_onboarding1"
         android:textSize="17sp"
         android:textColor="@color/typhography4"
         android:fontFamily="@font/poppins_regular"
@@ -64,6 +64,7 @@
 
         <!-- Contoh tiga dot (static), bisa juga nanti dinamis lewat Kotlin -->
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/dot1"
             android:layout_width="16dp"
             android:layout_height="16dp"
             android:layout_margin="4dp"
@@ -72,6 +73,7 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="16dp"
+            android:id="@+id/dot2"
             android:layout_height="16dp"
             android:layout_margin="4dp"
             android:background="@drawable/dot_selector"
@@ -79,6 +81,7 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="16dp"
+            android:id="@+id/dot3"
             android:layout_height="16dp"
             android:layout_margin="4dp"
             android:background="@drawable/dot_selector"
@@ -111,6 +114,7 @@
             android:layout_marginEnd="8dp" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/nextButton"
             android:layout_width="229dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
