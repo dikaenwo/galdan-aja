@@ -7,4 +7,6 @@
     <color name="buttonPrimary">#5AA918</color>
     <color name="buttonSecondary">#E8EBE6</color>
     <color name="typhographySecondaryGray">#B6B8B6</color>
+    <color name="typhography4">#60655C</color>
+    <color name="typhography5">#363A33</color>
 </resources>

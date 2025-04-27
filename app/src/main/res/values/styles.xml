@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <resources>
 
     <!-- Style untuk setiap item menu -->
@@ -28,3 +29,7 @@
     </style>
 
 </resources>
+=======
+<?xml version="1.0" encoding="utf-8"?>
+<resources></resources>
+>>>>>>> 10da49c842bae96a5084db02c3fa057dd0b39644

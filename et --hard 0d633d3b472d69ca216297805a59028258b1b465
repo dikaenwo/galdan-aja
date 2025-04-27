@@ -1,0 +1,36 @@
+[33mcommit 9b2180829fce5f04a2d26d193ecb49393b0b65a6[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Merge: 0d633d3 903e8c2
+Author: dikaenwo <rimaputri9879@gmail.com>
+Date:   Wed Apr 23 13:36:44 2025 +0800
+
+    solve merge conflitct
+
+[33mcommit 0d633d3b472d69ca216297805a59028258b1b465[m
+Author: Rezki Andika <71975180+dikaenwo@users.noreply.github.com>
+Date:   Wed Apr 23 13:14:34 2025 +0800
+
+    solve merge conflict
+
+[33mcommit 83918dc3bb1e34ba7a1ad4d26f37383efd0196f0[m
+Author: Lab_Mobile_26 <lab_mobile_26@Lab-Mobile-26s-iMac.local>
+Date:   Tue Apr 15 15:01:52 2025 +0800
+
+    auth
+
+[33mcommit 903e8c2c9e78b41361878994736fa1482b9f7287[m[33m ([m[1;31morigin/arni-satu[m[33m, [m[1;32marni-satu[m[33m)[m
+Author: arninoviani <arniinoviianii@gmail.com>
+Date:   Sun Apr 13 21:59:58 2025 +0800
+
+    splash screen, onboarding 1-4, home, detail produk, cart, search active, filter, tambah produk, home penjual
+
+[33mcommit fa800b158fdc9a8634653d0c351c70bf566e7331[m
+Author: Miracle Sitompul <rimaputri9879@gmail.com>
+Date:   Tue Mar 25 06:43:08 2025 +0800
+
+    update halaman login
+
+[33mcommit efb541637cfcb123fbc85e36282a459a7e879087[m
+Author: Miracle Sitompul <rimaputri9879@gmail.com>
+Date:   Tue Mar 11 14:18:13 2025 +0800
+
+    first-commit
