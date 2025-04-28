@@ -105,6 +105,7 @@
             android:layout_width="98dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:id="@+id/skipButton"
             android:text="Skip"
             android:background="@drawable/custom_button"
             android:enabled="false"

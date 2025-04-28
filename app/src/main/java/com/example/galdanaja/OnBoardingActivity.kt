@@ -25,6 +25,12 @@ class OnBoardingActivity : AppCompatActivity() {
         // Tampilkan halaman pertama
         updateOnboardingPage()
 
+        binding.skipButton.setOnClickListener {
+            val intent = Intent(this, EndOnBoardingActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
         binding.nextButton.setOnClickListener {
             if (currentPage < onboardingData.size - 1) {
                 currentPage++
