@@ -16,6 +16,14 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        if (FirebaseHelper.auth.currentUser != null) {
+            // Kalau masih login, langsung ke MainActivity
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+            return
+        }
+
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.tvDaftar.setOnClickListener {
@@ -28,18 +36,39 @@ class LoginActivity : AppCompatActivity() {
         binding.btnLogin.setOnClickListener {
             val email = binding.emailLogin.text.toString()
             val password = binding.passwordLogin.text.toString()
-            if (email.isNotEmpty() && password.isNotEmpty())
-            {
-                FirebaseHelper.auth.signInWithEmailAndPassword(email,password).addOnCompleteListener {
-                    if (it.isSuccessful){
-                        startActivity(Intent(this,MainActivity::class.java))
-                        finish()
+
+            if (email.isNotEmpty() && password.isNotEmpty()) {
+                FirebaseHelper.auth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            // Setelah login berhasil, CEK Firestore
+                            val uid = FirebaseHelper.auth.currentUser?.uid
+                            if (uid != null) {
+                                val db = FirebaseHelper.firestore
+                                db.collection("users").document(uid)
+                                    .get()
+                                    .addOnSuccessListener { document ->
+                                        if (document.exists()) {
+                                            // Data profil ADA ➔ langsung ke MainActivity
+                                            startActivity(Intent(this, MainActivity::class.java))
+                                        } else {
+                                            // Data profil BELUM ADA ➔ ke CreateProfileActivity
+                                            startActivity(Intent(this, CreateProfileActivity::class.java))
+                                        }
+                                        finish() // supaya login activity tidak bisa balik lagi
+                                    }
+                                    .addOnFailureListener { e ->
+                                        Toast.makeText(this, "Gagal cek data: ${e.message}", Toast.LENGTH_SHORT).show()
+                                    }
+                            }
+                        }
                     }
-                }.addOnFailureListener {
-                    Toast.makeText(this, "Email atau password tidak terdaftar", Toast.LENGTH_SHORT).show()
-                }
+                    .addOnFailureListener {
+                        Toast.makeText(this, "Email atau password tidak terdaftar", Toast.LENGTH_SHORT).show()
+                    }
             }
         }
+
     }
 
     private val inputWatcher = object : TextWatcher {

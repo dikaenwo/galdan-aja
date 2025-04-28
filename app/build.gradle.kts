@@ -53,6 +53,10 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.12.0"))
     androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
     implementation("com.google.android.gms:play-services-auth:20.7.0")
-
+    implementation("de.hdodenhof:circleimageview:3.1.0")
+    implementation("com.github.yalantis:ucrop:2.2.10")
+    implementation("com.google.firebase:firebase-storage-ktx:20.3.0")
+    implementation("com.google.firebase:firebase-firestore-ktx:24.9.0")
+    implementation("com.squareup.okhttp3:okhttp:4.9.1")
 
 }
