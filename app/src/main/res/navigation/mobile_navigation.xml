@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/navigation_home"
+    android:id="@+id/mobile_navigation">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.example.galdanaja.ui.home.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home"/>
+
+    <fragment
+        android:id="@+id/navigation_explore"
+        android:name="com.example.galdanaja.ui.explore.ExploreFragment"
+        android:label="Explore"
+        tools:layout="@layout/fragment_explore"/>
+
+    <fragment
+        android:id="@+id/navigation_favorite"
+        android:name="com.example.galdanaja.ui.favorite.FavoriteFragment"
+        android:label="Favorite"
+        tools:layout="@layout/fragment_favorite"/>
+
+    <fragment
+        android:id="@+id/navigation_cart"
+        android:name="com.example.galdanaja.ui.cart.CartFragment"
+        android:label="Cart"
+        tools:layout="@layout/fragment_cart"/>
+
+    <fragment
+        android:id="@+id/navigation_notification"
+        android:name="com.example.galdanaja.ui.notif.NotifFragment"
+        android:label="Notification"
+        tools:layout="@layout/fragment_notif"/>
+
+</navigation>

@@ -4,4 +4,9 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">12dp</item>
     </style>
+
+    <style name="NoActiveIndicator" parent="">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
 </resources>

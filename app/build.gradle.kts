@@ -48,6 +48,8 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.2.0")
     implementation("com.google.firebase:firebase-auth:23.2.0")
     implementation("androidx.activity:activity:1.8.0")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.8.9")
+    implementation("androidx.navigation:navigation-ui-ktx:2.8.9")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.2.1")
     implementation(platform("com.google.firebase:firebase-bom:33.12.0"))
