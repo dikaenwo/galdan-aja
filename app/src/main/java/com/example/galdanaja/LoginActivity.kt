@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -13,6 +15,7 @@ import com.google.firebase.auth.FirebaseAuth
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
+    private var isPasswordVisible = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +35,9 @@ class LoginActivity : AppCompatActivity() {
         binding.emailLogin.addTextChangedListener(inputWatcher)
         binding.passwordLogin.addTextChangedListener(inputWatcher)
         updateButtonState()
+        
+        // Tambahkan listener untuk toggle password visibility
+        setupPasswordToggle()
 
         binding.btnLogin.setOnClickListener {
             val email = binding.emailLogin.text.toString()
@@ -68,7 +74,26 @@ class LoginActivity : AppCompatActivity() {
                     }
             }
         }
+    }
 
+    // Tambahkan fungsi baru untuk mengatur toggle password
+    private fun setupPasswordToggle() {
+        binding.ivTogglePassword.setOnClickListener {
+            isPasswordVisible = !isPasswordVisible
+            
+            if (isPasswordVisible) {
+                // Tampilkan password
+                binding.passwordLogin.transformationMethod = HideReturnsTransformationMethod.getInstance()
+                binding.ivTogglePassword.setImageResource(R.drawable.ic_eye_open)
+            } else {
+                // Sembunyikan password
+                binding.passwordLogin.transformationMethod = PasswordTransformationMethod.getInstance()
+                binding.ivTogglePassword.setImageResource(R.drawable.ic_eye_closed)
+            }
+            
+            // Pindahkan kursor ke akhir teks
+            binding.passwordLogin.setSelection(binding.passwordLogin.text.length)
+        }
     }
 
     private val inputWatcher = object : TextWatcher {

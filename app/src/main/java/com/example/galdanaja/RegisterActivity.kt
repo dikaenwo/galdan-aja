@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -13,6 +15,8 @@ import com.google.firebase.auth.FirebaseAuth
 class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
+    private var isPasswordVisible = false
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
@@ -30,6 +34,9 @@ class RegisterActivity : AppCompatActivity() {
             updateButtonState()
         }
         updateButtonState()
+        
+        // Tambahkan setup untuk toggle password
+        setupPasswordToggle()
 
         binding.btnRegister.setOnClickListener {
             val email = binding.emailRegister.text.toString()
@@ -43,6 +50,26 @@ class RegisterActivity : AppCompatActivity() {
                 }.addOnFailureListener {
                     Toast.makeText(this,it.localizedMessage, Toast.LENGTH_SHORT).show()
                 }
+        }
+    }
+
+    // Tambahkan fungsi untuk toggle password
+    private fun setupPasswordToggle() {
+        binding.ivTogglePassword.setOnClickListener {
+            isPasswordVisible = !isPasswordVisible
+            
+            if (isPasswordVisible) {
+                // Tampilkan password
+                binding.passwordRegister.transformationMethod = HideReturnsTransformationMethod.getInstance()
+                binding.ivTogglePassword.setImageResource(R.drawable.ic_eye_open)
+            } else {
+                // Sembunyikan password
+                binding.passwordRegister.transformationMethod = PasswordTransformationMethod.getInstance()
+                binding.ivTogglePassword.setImageResource(R.drawable.ic_eye_closed)
+            }
+            
+            // Pindahkan kursor ke akhir teks
+            binding.passwordRegister.setSelection(binding.passwordRegister.text.length)
         }
     }
 
