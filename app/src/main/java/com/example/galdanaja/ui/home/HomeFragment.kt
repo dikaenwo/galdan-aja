@@ -36,15 +36,15 @@ class HomeFragment : Fragment() {
 
         loadUserProfile()
 
-        val dummyList = listOf(
-            GaldanItem("Salad Buah", "Rp. 3.000", R.drawable.saladbuah, R.drawable.avatars, "FamGath TMJ"),
-            GaldanItem("Nasi Goreng", "Rp. 10.000", R.drawable.saladbuah, R.drawable.avatars, "TMJ Crew"),
-            GaldanItem("Es Teh", "Rp. 2.000", R.drawable.saladbuah, R.drawable.avatars, "Dapur Bu RT"),
-            GaldanItem("Mie Ayam", "Rp. 8.000", R.drawable.saladbuah, R.drawable.avatars, "Warga RW 5")
-        )
+        val dummyList = ArrayList<GaldanItem>().apply {
+            add(GaldanItem("Risol Mayo Isi Ayam", "3.000", R.drawable.nunu, R.drawable.avatars, "FamGath TMJ"))
+            add(GaldanItem("Nasi Goreng", "10.000", R.drawable.saladbuah, R.drawable.avatars, "TMJ Crew"))
+            add(GaldanItem("Es Teh", "2.000", R.drawable.saladbuah, R.drawable.avatars, "Dapur Bu RT"))
+            add(GaldanItem("Mie Ayam", "8.000", R.drawable.saladbuah, R.drawable.avatars, "Warga RW 5"))
+        }
 
         binding.rvGaldan.layoutManager = GridLayoutManager(requireContext(), 2)
-        binding.rvGaldan.adapter = GaldanAdapter(dummyList)
+        binding.rvGaldan.adapter = GaldanAdapter(requireContext(), dummyList)
         val spacingInPx = (12 * Resources.getSystem().displayMetrics.density).toInt()
         binding.rvGaldan.addItemDecoration(HorizontalMarginItemDecoration(spacingInPx))
     }

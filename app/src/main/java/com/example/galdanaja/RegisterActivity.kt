@@ -10,7 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.galdanaja.databinding.ActivityRegisterBinding
-import com.google.firebase.auth.FirebaseAuth
+import com.example.galdanaja.helper.FirebaseHelper
 
 class RegisterActivity : AppCompatActivity() {
 
