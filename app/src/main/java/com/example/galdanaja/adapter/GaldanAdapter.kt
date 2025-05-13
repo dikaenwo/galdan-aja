@@ -5,8 +5,8 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.galdanaja.DetailProductActivity
-import com.example.galdanaja.GaldanItem
+import com.example.galdanaja.ui.product.DetailProductActivity
+import com.example.galdanaja.item.GaldanItem
 import com.example.galdanaja.databinding.ItemRowDaftarGaldanBinding
 
 class GaldanAdapter(private val context: Context, private val listGaldan: ArrayList<GaldanItem>) :

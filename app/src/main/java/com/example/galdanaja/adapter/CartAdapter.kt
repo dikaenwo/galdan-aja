@@ -3,7 +3,7 @@ package com.example.galdanaja.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.galdanaja.CartItem
+import com.example.galdanaja.item.CartItem
 import com.example.galdanaja.databinding.ItemRowDaftarCartBinding
 
 class CartAdapter(private val items: List<CartItem>) :

@@ -2,24 +2,62 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".ui.profile.CreateProfileActivity">
+    tools:context=".ui.profile.EditProfileActivity">
 
-    <TextView
-        android:id="@+id/textTitle"
-        android:layout_width="match_parent"
+    <ImageButton
+        android:id="@+id/icBack"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="24dp"
+        android:background="@null"
+        android:src="@drawable/ic_arrow_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Back"
+        android:textColor="@color/typhography5"
+        android:textSize="13sp"
+        app:layout_constraintStart_toEndOf="@+id/icBack"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvMyAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="My Account"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:fontFamily="@font/poppins_bold"
-        android:text="Buat Profile Baru"
-        android:textSize="32sp"
+        android:text="Save"
+        android:textColor="@color/buttonPrimary"
+        android:textSize="13sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/tvBack"
         app:layout_constraintTop_toTopOf="parent" />
 
     <FrameLayout
@@ -30,13 +68,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textTitle">
+        app:layout_constraintTop_toBottomOf="@+id/tvMyAccount">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imgProfile"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/avatars" />
+            android:src="@drawable/nunu" />
 
         <ImageButton
             android:id="@+id/btnCamera"
@@ -59,11 +97,11 @@
         android:background="@drawable/custom_input_auth"
         android:ems="10"
         android:fontFamily="@font/poppins_regular"
-        android:hint="fullname"
+        android:text="Cha Eunwoo"
         android:inputType="textEmailAddress"
         android:paddingVertical="16dp"
         android:paddingLeft="20dp"
-        android:textColor="#91958E"
+        android:textColor="@color/typhography5"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -93,7 +131,7 @@
             android:layout_marginRight="12dp"
             android:inputType="phone"
             android:paddingLeft="20dp"
-            android:textColor="#91958E"
+            android:textColor="@color/typhography5"
             android:textSize="15sp" />
         <EditText
             android:id="@+id/nomorTelpon"
@@ -102,37 +140,13 @@
             android:background="@drawable/custom_input_auth"
             android:ems="10"
             android:fontFamily="@font/poppins_regular"
-            android:hint="nomor telpon"
+            android:text="85756128504"
             android:inputType="phone"
             android:paddingLeft="20dp"
             android:paddingVertical="12dp"
-            android:textColor="#91958E"
+            android:textColor="@color/typhography5"
             android:textSize="15sp" />
 
     </LinearLayout>
-
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnRegisterProfile"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="252dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/custom_button"
-        android:enabled="false"
-        android:fontFamily="@font/poppins_bold"
-        android:paddingHorizontal="12dp"
-        android:paddingVertical="16dp"
-        android:stateListAnimator="@null"
-        android:text="Continue"
-        android:textAllCaps="false"
-        android:textColor="@color/typhographySecondaryGray"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNomor" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

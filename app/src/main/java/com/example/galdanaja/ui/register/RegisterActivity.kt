@@ -1,4 +1,4 @@
-package com.example.galdanaja
+package com.example.galdanaja.ui.register
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,8 +9,10 @@ import android.text.method.PasswordTransformationMethod
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.example.galdanaja.R
 import com.example.galdanaja.databinding.ActivityRegisterBinding
 import com.example.galdanaja.helper.FirebaseHelper
+import com.example.galdanaja.ui.login.LoginActivity
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -26,7 +28,9 @@ class RegisterActivity : AppCompatActivity() {
             startActivity(Intent(this, LoginActivity::class.java))
         }
 
-        binding.checkBox.buttonDrawable = ContextCompat.getDrawable(this, R.drawable.checkbox_selector)
+        binding.checkBox.buttonDrawable = ContextCompat.getDrawable(this,
+            R.drawable.checkbox_selector
+        )
         binding.checkBox.buttonTintList = null
         binding.emailRegister.addTextChangedListener(inputWatcher)
         binding.passwordRegister.addTextChangedListener(inputWatcher)
@@ -44,7 +48,7 @@ class RegisterActivity : AppCompatActivity() {
             if (email.isNotEmpty() && password.isNotEmpty())
                 FirebaseHelper.auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener {
                     if (it.isSuccessful){
-                        startActivity(Intent(this,LoginActivity::class.java))
+                        startActivity(Intent(this, LoginActivity::class.java))
                         finish()
                     }
                 }.addOnFailureListener {

@@ -1,9 +1,10 @@
-package com.example.galdanaja
+package com.example.galdanaja.ui.splash
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.example.galdanaja.MainActivity
 import com.example.galdanaja.databinding.ActivitySplashScreenBinding
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch

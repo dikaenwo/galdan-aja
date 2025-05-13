@@ -1,8 +1,9 @@
-package com.example.galdanaja
+package com.example.galdanaja.ui.splash
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.galdanaja.R
 import com.example.galdanaja.databinding.ActivityOnBoardingBinding
 
 class OnBoardingActivity : AppCompatActivity() {

@@ -1,4 +1,4 @@
-package com.example.galdanaja
+package com.example.galdanaja.ui.login
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,6 +9,10 @@ import android.text.method.PasswordTransformationMethod
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.example.galdanaja.ui.profile.CreateProfileActivity
+import com.example.galdanaja.MainActivity
+import com.example.galdanaja.R
+import com.example.galdanaja.ui.register.RegisterActivity
 import com.example.galdanaja.databinding.ActivityLoginBinding
 import com.example.galdanaja.helper.FirebaseHelper
 

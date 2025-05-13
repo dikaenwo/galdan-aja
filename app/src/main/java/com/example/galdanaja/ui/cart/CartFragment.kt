@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.galdanaja.CartItem
+import com.example.galdanaja.item.CartItem
 import com.example.galdanaja.R
 import com.example.galdanaja.adapter.CartAdapter
 import com.example.galdanaja.databinding.FragmentCartBinding

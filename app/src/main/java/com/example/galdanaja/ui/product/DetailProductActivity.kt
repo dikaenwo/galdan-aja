@@ -1,8 +1,9 @@
-package com.example.galdanaja
+package com.example.galdanaja.ui.product
 
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.galdanaja.R
 import com.example.galdanaja.databinding.ActivityDetailProductBinding
 
 class DetailProductActivity : AppCompatActivity() {

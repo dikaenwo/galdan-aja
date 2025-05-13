@@ -1,4 +1,4 @@
-package com.example.galdanaja
+package com.example.galdanaja.item
 
 data class CartItem(
     val name: String,

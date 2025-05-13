@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".DetailProductActivity">
+    tools:context=".ui.product.DetailProductActivity">
 
     <!-- Tambahkan NestedScrollView untuk konten yang bisa di-scroll -->
     <androidx.core.widget.NestedScrollView
@@ -52,7 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="204dp"
-                android:layout_marginTop="22dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
                 android:background="@null"
                 android:src="@drawable/ic_share"

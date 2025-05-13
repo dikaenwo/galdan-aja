@@ -1,4 +1,4 @@
-package com.example.galdanaja
+package com.example.galdanaja.ui.profile
 
 import android.app.Activity
 import android.content.Intent
@@ -9,15 +9,13 @@ import android.text.TextWatcher
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import com.example.galdanaja.MainActivity
 import com.example.galdanaja.databinding.ActivityCreateProfileBinding
-import com.google.firebase.FirebaseException
 import com.google.firebase.auth.*
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.storage.FirebaseStorage
 import com.yalantis.ucrop.UCrop
 import okhttp3.Call
 import okhttp3.Callback
-import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
@@ -27,7 +25,6 @@ import okhttp3.Response
 import okio.IOException
 import org.json.JSONObject
 import java.io.File
-import java.util.concurrent.TimeUnit
 
 class CreateProfileActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCreateProfileBinding

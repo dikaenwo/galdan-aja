@@ -1,11 +1,14 @@
-package com.example.galdanaja
+package com.example.galdanaja.ui.splash
 
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.galdanaja.MainActivity
+import com.example.galdanaja.R
 import com.example.galdanaja.databinding.ActivityEndOnBoardingBinding
+import com.example.galdanaja.ui.register.RegisterActivity
 import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.identity.Identity
 import com.google.android.gms.auth.api.identity.SignInClient

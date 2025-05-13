@@ -2,9 +2,10 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="168dp"
+    android:layout_width="161.06dp"
     android:layout_height="197dp"
     android:layout_marginBottom="16dp"
+    app:cardElevation="8dp"
     android:layout_marginRight="16dp"
     app:cardCornerRadius="16dp">
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,13 +16,13 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/img_item_photo"
-            android:layout_width="145dp"
+            android:layout_width="135.29dp"
             android:layout_height="105dp"
             android:layout_marginStart="13dp"
             android:layout_marginTop="6dp"
-            android:layout_marginEnd="13dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/saladbuah"
+            android:layout_marginEnd="13dp"
+            android:src="@drawable/nunu"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -48,6 +49,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
+            android:layout_marginTop="-2dp"
             android:fontFamily="@font/poppins_bold"
             android:text="Rp.3000"
             android:textColor="@color/buttonPrimary"
@@ -61,7 +63,7 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginStart="5dp"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="4dp"
             android:src="@drawable/avatars"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -82,4 +84,5 @@
             app:layout_constraintVertical_bias="1.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.cardview.widget.CardView>
