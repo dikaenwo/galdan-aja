@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.example.galdanaja.ActivityInputProduct
 import com.example.galdanaja.R
 import com.example.galdanaja.databinding.ActivityProfileBinding
 import com.example.galdanaja.ui.login.LoginActivity
@@ -78,6 +79,11 @@ class ProfileActivity : AppCompatActivity() {
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
             finish()
+        }
+
+        binding.tvPenjual.setOnClickListener {
+            val intent = Intent(this, ActivityInputProduct::class.java)
+            startActivity(intent)
         }
     }
     
