@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.galdanaja.R
 import com.example.galdanaja.adapter.CartAdapter
 import com.example.galdanaja.databinding.FragmentCartBinding
 import com.example.galdanaja.helper.FirebaseHelper
@@ -82,6 +84,44 @@ class CartFragment : Fragment() {
             }
     }
 
+    private fun showQrisDialog() {
+        val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_qris, null)
+
+        val builder = AlertDialog.Builder(requireContext())
+            .setTitle("Scan QRIS untuk Membayar")
+            .setView(dialogView)
+            .setPositiveButton("Saya sudah bayar") { dialog, _ ->
+                dialog.dismiss()
+                savePaymentNotification()
+            }
+            .setNegativeButton("Batal", null)
+
+        builder.create().show()
+    }
+
+    private fun savePaymentNotification() {
+        val userId = FirebaseHelper.auth.currentUser?.uid ?: return
+
+        val notification = mapOf(
+            "title" to "Pembayaran sedang divalidasi",
+            "description" to "Pembayaran kamu sedang diperiksa oleh admin.",
+            "time" to System.currentTimeMillis(),
+            "userId" to userId
+        )
+
+        FirebaseHelper.firestore
+            .collection("notifications")
+            .add(notification)
+            .addOnSuccessListener {
+                Toast.makeText(context, "Notifikasi terkirim", Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener {
+                Toast.makeText(context, "Gagal mengirim notifikasi", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+
+
     private fun updateTotal() {
         val total = cartItems.sumOf { it.price * it.quantity }
         binding.tvTotalPrice.text = "Rp ${String.format("%,d", total).replace(',', '.')}"
@@ -90,34 +130,16 @@ class CartFragment : Fragment() {
             if (cartItems.isEmpty()) {
                 Toast.makeText(context, "Keranjang kosong", Toast.LENGTH_SHORT).show()
             } else {
-                // Checkout simulasi: hapus isi cart
-                val userId = FirebaseHelper.auth.currentUser?.uid ?: return@setOnClickListener
-                FirebaseHelper.firestore
-                    .collection("carts")
-                    .document(userId)
-                    .collection("items")
-                    .get()
-                    .addOnSuccessListener { snapshot ->
-                        val batch = FirebaseHelper.firestore.batch()
-                        snapshot.documents.forEach { doc ->
-                            batch.delete(doc.reference)
-                        }
-                        batch.commit().addOnSuccessListener {
-                            cartItems.clear()
-                            cartAdapter.notifyDataSetChanged()
-                            updateTotal()
-                            Toast.makeText(context, "Pembayaran berhasil & keranjang dikosongkan", Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                    .addOnFailureListener {
-                        Toast.makeText(context, "Gagal saat checkout", Toast.LENGTH_SHORT).show()
-                    }
+                showQrisDialog()
             }
         }
+
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
+
 }
