@@ -1,8 +1,9 @@
 package com.example.galdanaja.item
 
 data class CartItem(
-    val name: String,
-    val price: String,
-    val imageResId: Int,
-    var quantity: Int
+    val productId: String = "",
+    val name: String = "",
+    val price: Int = 0,            // <-- ini INT
+    val imageUrl: String = "",
+    var quantity: Int = 1
 )

@@ -2,12 +2,17 @@ package com.example.galdanaja.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.example.galdanaja.item.CartItem
+import com.bumptech.glide.Glide
 import com.example.galdanaja.databinding.ItemRowDaftarCartBinding
+import com.example.galdanaja.helper.FirebaseHelper
+import com.example.galdanaja.item.CartItem
 
-class CartAdapter(private val items: List<CartItem>) :
-    RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
+class CartAdapter(
+    private val items: MutableList<CartItem>,
+    private val onCartChanged: () -> Unit
+) : RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
 
     inner class CartViewHolder(val binding: ItemRowDaftarCartBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -21,24 +26,46 @@ class CartAdapter(private val items: List<CartItem>) :
         val item = items[position]
         with(holder.binding) {
             textView8.text = item.name
-            textView9.text = item.price
-            imgItemPhoto.setImageResource(item.imageResId)
+            textView9.text = "Rp ${String.format("%,d", item.price).replace(',', '.')}"
             textView10.text = item.quantity.toString()
-            
-            // Menambahkan fungsi untuk tombol plus dan minus
+
+            Glide.with(imgItemPhoto.context)
+                .load(item.imageUrl)
+                .into(imgItemPhoto)
+
             btCartPlus.setOnClickListener {
                 item.quantity++
                 textView10.text = item.quantity.toString()
+                updateQuantityInFirestore(item)
+                onCartChanged()
             }
-            
+
             btCartMin.setOnClickListener {
                 if (item.quantity > 1) {
                     item.quantity--
                     textView10.text = item.quantity.toString()
+                    updateQuantityInFirestore(item)
+                    onCartChanged()
+                } else {
+                    Toast.makeText(holder.itemView.context, "Minimal 1 item", Toast.LENGTH_SHORT).show()
                 }
             }
         }
     }
 
     override fun getItemCount(): Int = items.size
+
+    private fun updateQuantityInFirestore(item: CartItem) {
+        val userId = FirebaseHelper.auth.currentUser?.uid ?: return
+        FirebaseHelper.firestore
+            .collection("carts")
+            .document(userId)
+            .collection("items")
+            .document(item.productId)
+            .update("quantity", item.quantity)
+            .addOnFailureListener {
+                Toast.makeText(null, "Gagal update quantity", Toast.LENGTH_SHORT).show()
+            }
+    }
 }
+

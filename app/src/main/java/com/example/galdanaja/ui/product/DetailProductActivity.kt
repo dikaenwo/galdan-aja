@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.galdanaja.R
 import com.example.galdanaja.databinding.ActivityDetailProductBinding
+import com.example.galdanaja.helper.FirebaseHelper
+import com.example.galdanaja.item.CartItem
 
 class DetailProductActivity : AppCompatActivity() {
 
@@ -119,8 +121,39 @@ class DetailProductActivity : AppCompatActivity() {
         }
 
         binding.btnProceedToPay.setOnClickListener {
-            Toast.makeText(this, "Produk berhasil dipesan", Toast.LENGTH_SHORT).show()
+            val userId = FirebaseHelper.auth.currentUser?.uid
+
+            if (userId == null) {
+                Toast.makeText(this, "Anda belum login", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            val productId = intent.getStringExtra("PRODUCT_ID") ?: return@setOnClickListener
+
+            val cartItem = hashMapOf(
+                "productId" to productId,
+                "name" to binding.textView12.text.toString(),
+                "price" to basePrice,
+                "imageUrl" to intent.getStringExtra("PRODUCT_IMAGE_URL"),
+                "quantity" to quantity
+            )
+
+            FirebaseHelper.firestore
+                .collection("carts")
+                .document(userId)
+                .collection("items")
+                .document(productId)
+                .set(cartItem)
+                .addOnSuccessListener {
+                    Toast.makeText(this, "Produk ditambahkan ke keranjang", Toast.LENGTH_SHORT).show()
+                    finish()
+                }
+                .addOnFailureListener {
+                    Toast.makeText(this, "Gagal menambahkan ke keranjang", Toast.LENGTH_SHORT).show()
+                }
         }
+
+
     }
 
     private fun updateQuantityDisplay() {
