@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.galdanaja.adapter.GaldanAdapter // <-- Gunakan adapter yang sama
 import com.example.galdanaja.databinding.FragmentHomeSellerBinding
+import com.example.galdanaja.helper.FirebaseHelper
 import com.example.galdanaja.item.GaldanItem // <-- Gunakan item yang sama
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
@@ -39,9 +40,10 @@ class HomeSellerFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupRecyclerView()
-        //loadSellerProducts()
-        loadCurrentSellerInfo()
-        loadSellerDashboardData() // Fungsi untuk memuat data dashboard (opsional)
+        loadCurrentSellerInfo() // Ini untuk memuat daftar produk di bawah
+
+        // PANGGIL FUNGSI INI UNTUK MENG-UPDATE KARTU DASHBOARD
+        loadSellerDashboardData()
     }
 
     private fun setupRecyclerView() {
@@ -54,16 +56,63 @@ class HomeSellerFragment : Fragment() {
         }
     }
 
+    // Di dalam class HomeSellerFragment.kt
+
     private fun loadSellerDashboardData() {
+        val currentUserId = FirebaseHelper.auth.currentUser?.uid ?: return
 
-        val totalPenghasilan = 70000 // contoh data dari firestore
-        val jumlahTerjual = 15      // contoh data dari firestore
-        val totalProduk = 5         // contoh data dari firestore
+        // --- 1. MENGHITUNG TOTAL PENGHASILAN DARI "BUKU KAS" (TRANSACTIONS) ---
+        // BUKAN LAGI DARI KOLEKSI 'orders'
+        FirebaseHelper.firestore.collection("users").document(currentUserId)
+            .collection("transactions") // <-- KITA MEMBACA DARI SINI
+            .whereEqualTo("type", "credit") // Filter hanya untuk pemasukan
+            .get()
+            .addOnSuccessListener { transactionDocuments ->
+                var totalEarnings = 0L
+                for (doc in transactionDocuments) {
+                    totalEarnings += doc.getLong("amount") ?: 0L
+                }
+                // Update UI Penghasilan
+                val formattedEarnings = "Rp ${String.format("%,d", totalEarnings).replace(',', '.')}"
+                binding.tvEarningsAmount.text = formattedEarnings
+            }
+            .addOnFailureListener {
+                binding.tvEarningsAmount.text = "Rp 0"
+                Log.e("HomeSellerFragment", "Gagal mengambil data transaksi.", it)
+            }
 
-        // Update UI
-        binding.tvEarningsAmount.text = "Rp ${totalPenghasilan}"
-        binding.tvSoldCount.text = jumlahTerjual.toString()
-        binding.tvTotalProductsCount.text = totalProduk.toString()
+        // --- 2. MENGHITUNG PRODUK TERJUAL DARI 'orders' YANG SUDAH SELESAI ---
+        FirebaseHelper.firestore.collection("orders")
+            .whereEqualTo("sellerId", currentUserId)
+            .whereEqualTo("status", "completed") // <-- Hanya hitung yang sudah divalidasi
+            .get()
+            .addOnSuccessListener { orderDocuments ->
+                var totalItemsSold = 0L
+                for (doc in orderDocuments) {
+                    val items = doc.get("items") as? List<Map<String, Any>>
+                    items?.forEach { item ->
+                        totalItemsSold += item["quantity"] as? Long ?: 0L
+                    }
+                }
+                // Update UI Produk Terjual
+                binding.tvSoldCount.text = totalItemsSold.toString()
+            }
+            .addOnFailureListener {
+                binding.tvSoldCount.text = "0"
+            }
+
+
+        // --- 3. MENGHITUNG TOTAL PRODUK YANG DIMILIKI DARI 'products' ---
+        FirebaseHelper.firestore.collection("products")
+            .whereEqualTo("userId", currentUserId)
+            .get()
+            .addOnSuccessListener { productDocuments ->
+                // Update UI Total Produk
+                binding.tvTotalProductsCount.text = productDocuments.size().toString()
+            }
+            .addOnFailureListener {
+                binding.tvTotalProductsCount.text = "0"
+            }
     }
 
     // Tambahkan fungsi ini di dalam HomeSellerFragment.kt

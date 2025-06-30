@@ -144,7 +144,8 @@ class DetailProductActivity : AppCompatActivity() {
                 "name" to binding.textView12.text.toString(),
                 "price" to basePrice,
                 "imageUrl" to intent.getStringExtra("PRODUCT_IMAGE_URL"),
-                "quantity" to quantity
+                "quantity" to quantity,
+                "sellerId" to productUserId // <-- PASTIKAN ANDA MENYIMPAN INI
             )
 
             FirebaseHelper.firestore
