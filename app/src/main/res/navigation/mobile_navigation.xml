@@ -19,9 +19,9 @@
 
     <fragment
         android:id="@+id/navigation_favorite"
-        android:name="com.example.galdanaja.ui.favorite.FavoriteFragment"
+        android:name="com.example.galdanaja.ui.chat.ChatFragment"
         android:label="Favorite"
-        tools:layout="@layout/fragment_favorite"/>
+        tools:layout="@layout/fragment_chat"/>
 
     <fragment
         android:id="@+id/navigation_cart"

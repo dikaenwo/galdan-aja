@@ -1,5 +1,6 @@
 package com.example.galdanaja.ui.product
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -76,7 +77,15 @@ class DetailProductActivity : AppCompatActivity() {
         }
 
         binding.imageButton3.setOnClickListener {
-            Toast.makeText(this, "Ditambahkan ke favorit", Toast.LENGTH_SHORT).show()
+            // Ambil ID dan nama penjual dari intent
+            val sellerId = intent.getStringExtra("PRODUCT_USER_ID") ?: ""
+            val sellerName = intent.getStringExtra("PRODUCT_USER_NAME") ?: "Penjual"
+
+            if (sellerId.isNotEmpty()) {
+                startChatWithSeller(sellerId, sellerName)
+            } else {
+                Toast.makeText(this, "ID Penjual tidak ditemukan", Toast.LENGTH_SHORT).show()
+            }
         }
 
         // Set initial quantity display
@@ -165,5 +174,66 @@ class DetailProductActivity : AppCompatActivity() {
         val totalPrice = basePrice * quantity
         binding.tvTotalPrice.text = "Rp ${String.format("%,d", totalPrice).replace(',', '.')}"
         Log.d("DetailProductActivity", "Harga diupdate: Rp $totalPrice ($quantity x $basePrice)")
+    }
+
+    private fun startChatWithSeller(sellerId: String, sellerName: String) {
+        // 1. Dapatkan ID user saat ini (pembeli)
+        val currentUserId = FirebaseHelper.auth.currentUser?.uid
+        if (currentUserId == null) {
+            Toast.makeText(this, "Anda harus login untuk memulai chat", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        // 2. Cek agar user tidak bisa chat dengan diri sendiri
+        if (currentUserId == sellerId) {
+            Toast.makeText(this, "Anda tidak bisa mengirim pesan ke diri sendiri", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        // 3. Buat daftar peserta untuk query. Urutkan agar konsisten.
+        val participants = listOf(currentUserId, sellerId).sorted()
+
+        // 4. Query ke Firestore untuk mencari chat yang pesertanya sama persis
+        FirebaseHelper.firestore.collection("chats")
+            .whereEqualTo("participants", participants)
+            .get()
+            .addOnSuccessListener { querySnapshot ->
+                if (!querySnapshot.isEmpty) {
+                    // 5a. JIKA CHAT DITEMUKAN: Langsung navigasi dengan ID yang ada
+                    val chatId = querySnapshot.documents.first().id
+                    navigateToChatActivity(chatId, sellerId, sellerName)
+                } else {
+                    // 5b. JIKA CHAT TIDAK DITEMUKAN: Buat dokumen chat baru
+                    val newChat = hashMapOf(
+                        "participants" to participants,
+                        "lastMessage" to "Mulai percakapan...",
+                        "timestamp" to com.google.firebase.firestore.FieldValue.serverTimestamp()
+                    )
+
+                    FirebaseHelper.firestore.collection("chats")
+                        .add(newChat)
+                        .addOnSuccessListener { documentReference ->
+                            // Navigasi setelah chat berhasil dibuat
+                            navigateToChatActivity(documentReference.id, sellerId, sellerName)
+                        }
+                        .addOnFailureListener { e ->
+                            Toast.makeText(this, "Gagal memulai chat: ${e.message}", Toast.LENGTH_SHORT).show()
+                        }
+                }
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(this, "Gagal mencari chat: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    // Di dalam DetailProductActivity.kt
+    private fun navigateToChatActivity(chatId: String, sellerId: String, sellerName: String) {
+        val intent = Intent(this, com.example.galdanaja.ui.chat.ChatActivity::class.java).apply {
+            putExtra("CHAT_ID", chatId)
+            putExtra("OTHER_USER_ID", sellerId)
+            // Pastikan baris ini ada dan sellerName tidak kosong
+            putExtra("OTHER_USER_NAME", sellerName)
+        }
+        startActivity(intent)
     }
 }
