@@ -13,6 +13,7 @@ import com.example.galdanaja.R
 import com.example.galdanaja.databinding.ActivityRegisterBinding
 import com.example.galdanaja.helper.FirebaseHelper
 import com.example.galdanaja.ui.login.LoginActivity
+import com.example.galdanaja.ui.profile.CreateProfileActivity
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -46,10 +47,13 @@ class RegisterActivity : AppCompatActivity() {
             val email = binding.emailRegister.text.toString()
             val password = binding.passwordRegister.text.toString()
             if (email.isNotEmpty() && password.isNotEmpty())
+            // Di dalam binding.btnRegister.setOnClickListener
+
                 FirebaseHelper.auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener {
                     if (it.isSuccessful){
-                        startActivity(Intent(this, LoginActivity::class.java))
-                        finish()
+                        // Langsung arahkan ke halaman buat profil setelah berhasil daftar
+                        startActivity(Intent(this, CreateProfileActivity::class.java))
+                        finish() // Tutup halaman register agar tidak bisa kembali
                     }
                 }.addOnFailureListener {
                     Toast.makeText(this,it.localizedMessage, Toast.LENGTH_SHORT).show()

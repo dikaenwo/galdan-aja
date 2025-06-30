@@ -12,11 +12,11 @@
         tools:layout="@layout/fragment_home_seller"/>
 
 
-<!--    <fragment-->
-<!--        android:id="@+id/navigation_favorite"-->
-<!--        android:name="com.example.galdanaja.ui.chat.ChatFragment"-->
-<!--        android:label="Favorite"-->
-<!--        tools:layout="@layout/fragment_chat"/>-->
+    <fragment
+        android:id="@+id/navigation_favorite"
+        android:name="com.example.galdanaja.ui.chat.ChatFragment"
+        android:label="Favorite"
+        tools:layout="@layout/fragment_chat"/>
 
     <fragment
         android:id="@+id/navigation_tambah"
@@ -24,10 +24,10 @@
         android:label="Cart"
         tools:layout="@layout/fragment_tambah"/>
 
-<!--    <fragment-->
-<!--        android:id="@+id/navigation_notification"-->
-<!--        android:name="com.example.galdanaja.ui.notif.NotifFragment"-->
-<!--        android:label="Notification"-->
-<!--        tools:layout="@layout/fragment_notif"/>-->
+    <fragment
+        android:id="@+id/navigation_notification"
+        android:name="com.example.galdanaja.ui.notif.NotifFragment"
+        android:label="Notification"
+        tools:layout="@layout/fragment_notif"/>
 
 </navigation>

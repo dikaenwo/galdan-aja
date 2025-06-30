@@ -1,12 +1,15 @@
 package com.example.galdanaja.penjual.home
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.galdanaja.R
 import com.example.galdanaja.adapter.GaldanAdapter // <-- Gunakan adapter yang sama
 import com.example.galdanaja.databinding.FragmentHomeSellerBinding
 import com.example.galdanaja.helper.FirebaseHelper
@@ -26,6 +29,7 @@ class HomeSellerFragment : Fragment() {
 
     private var currentSellerName: String = "Penjual"
     private var currentSellerPhotoUrl: String = ""
+    private var totalEarnings: Long = 0L // Variabel baru untuk validasi
 
 
     override fun onCreateView(
@@ -44,6 +48,10 @@ class HomeSellerFragment : Fragment() {
 
         // PANGGIL FUNGSI INI UNTUK MENG-UPDATE KARTU DASHBOARD
         loadSellerDashboardData()
+
+        binding.btnWithdraw.setOnClickListener {
+            showWithdrawDialog()
+        }
     }
 
     private fun setupRecyclerView() {
@@ -58,33 +66,40 @@ class HomeSellerFragment : Fragment() {
 
     // Di dalam class HomeSellerFragment.kt
 
+    // Di dalam class HomeSellerFragment.kt
+
     private fun loadSellerDashboardData() {
         val currentUserId = FirebaseHelper.auth.currentUser?.uid ?: return
+        val db = FirebaseHelper.firestore
 
-        // --- 1. MENGHITUNG TOTAL PENGHASILAN DARI "BUKU KAS" (TRANSACTIONS) ---
-        // BUKAN LAGI DARI KOLEKSI 'orders'
-        FirebaseHelper.firestore.collection("users").document(currentUserId)
-            .collection("transactions") // <-- KITA MEMBACA DARI SINI
-            .whereEqualTo("type", "credit") // Filter hanya untuk pemasukan
+        // --- 1. MENGHITUNG SALDO AKHIR DARI SEMUA TRANSAKSI (PEMASUKAN & PENGELUARAN) ---
+        db.collection("users").document(currentUserId)
+            .collection("transactions") // <-- Ambil SEMUA transaksi
             .get()
             .addOnSuccessListener { transactionDocuments ->
-                var totalEarnings = 0L
+                var currentBalance = 0L // Mulai dari 0
                 for (doc in transactionDocuments) {
-                    totalEarnings += doc.getLong("amount") ?: 0L
+                    // Langsung jumlahkan. Pemasukan (credit) akan menambah,
+                    // pengeluaran (debit) akan mengurangi karena nilainya negatif.
+                    currentBalance += doc.getLong("amount") ?: 0L
                 }
-                // Update UI Penghasilan
-                val formattedEarnings = "Rp ${String.format("%,d", totalEarnings).replace(',', '.')}"
-                binding.tvEarningsAmount.text = formattedEarnings
+
+                // Simpan saldo saat ini untuk validasi penarikan
+                this.totalEarnings = currentBalance
+
+                // Update UI Saldo (Penghasilan)
+                val formattedBalance = "Rp ${String.format("%,d", currentBalance).replace(',', '.')}"
+                binding.tvEarningsAmount.text = formattedBalance
             }
             .addOnFailureListener {
                 binding.tvEarningsAmount.text = "Rp 0"
                 Log.e("HomeSellerFragment", "Gagal mengambil data transaksi.", it)
             }
 
-        // --- 2. MENGHITUNG PRODUK TERJUAL DARI 'orders' YANG SUDAH SELESAI ---
-        FirebaseHelper.firestore.collection("orders")
+        // --- 2. MENGHITUNG PRODUK TERJUAL (logika ini tetap sama) ---
+        db.collection("orders")
             .whereEqualTo("sellerId", currentUserId)
-            .whereEqualTo("status", "completed") // <-- Hanya hitung yang sudah divalidasi
+            .whereEqualTo("status", "completed")
             .get()
             .addOnSuccessListener { orderDocuments ->
                 var totalItemsSold = 0L
@@ -94,20 +109,17 @@ class HomeSellerFragment : Fragment() {
                         totalItemsSold += item["quantity"] as? Long ?: 0L
                     }
                 }
-                // Update UI Produk Terjual
                 binding.tvSoldCount.text = totalItemsSold.toString()
             }
             .addOnFailureListener {
                 binding.tvSoldCount.text = "0"
             }
 
-
-        // --- 3. MENGHITUNG TOTAL PRODUK YANG DIMILIKI DARI 'products' ---
-        FirebaseHelper.firestore.collection("products")
+        // --- 3. MENGHITUNG TOTAL PRODUK (logika ini tetap sama) ---
+        db.collection("products")
             .whereEqualTo("userId", currentUserId)
             .get()
             .addOnSuccessListener { productDocuments ->
-                // Update UI Total Produk
                 binding.tvTotalProductsCount.text = productDocuments.size().toString()
             }
             .addOnFailureListener {
@@ -115,9 +127,6 @@ class HomeSellerFragment : Fragment() {
             }
     }
 
-    // Tambahkan fungsi ini di dalam HomeSellerFragment.kt
-
-    // Di dalam HomeSellerFragment.kt
 
     private fun loadSellerProducts() {
         val currentUserId = Firebase.auth.currentUser?.uid ?: return
@@ -179,6 +188,84 @@ class HomeSellerFragment : Fragment() {
                 Log.w("HomeSellerFragment", "Gagal mengambil info user.", exception)
                 // Walaupun gagal, tetap coba muat produknya
                 loadSellerProducts()
+            }
+    }
+
+    // Tambahkan fungsi ini di dalam HomeSellerFragment.kt
+    private fun showWithdrawDialog() {
+        // Inflate layout kustom untuk dialog
+        val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_withdraw, null)
+
+        // Inisialisasi view di dalam dialog
+        val spinnerBanks = dialogView.findViewById<android.widget.Spinner>(R.id.spinner_banks)
+        val etAccountNumber = dialogView.findViewById<com.google.android.material.textfield.TextInputEditText>(R.id.et_account_number)
+        val etAmount = dialogView.findViewById<com.google.android.material.textfield.TextInputEditText>(R.id.et_amount)
+
+        // Siapkan daftar bank untuk Spinner
+        val banks = arrayOf("BCA", "Mandiri", "BNI", "BRI", "CIMB Niaga", "Lainnya")
+        val adapter = android.widget.ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, banks)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinnerBanks.adapter = adapter
+
+        // Buat dan tampilkan AlertDialog
+        AlertDialog.Builder(requireContext())
+            .setTitle("Ajukan Penarikan Dana")
+            .setView(dialogView)
+            .setPositiveButton("Ajukan") { dialog, _ ->
+                val selectedBank = spinnerBanks.selectedItem.toString()
+                val accountNumber = etAccountNumber.text.toString().trim()
+                val amountString = etAmount.text.toString().trim()
+
+                // Validasi input
+                if (accountNumber.isEmpty() || amountString.isEmpty()) {
+                    Toast.makeText(requireContext(), "Semua field harus diisi!", Toast.LENGTH_SHORT).show()
+                    return@setPositiveButton
+                }
+
+                val amountToWithdraw = amountString.toLong()
+                if (amountToWithdraw <= 0) {
+                    Toast.makeText(requireContext(), "Nominal harus lebih dari 0", Toast.LENGTH_SHORT).show()
+                    return@setPositiveButton
+                }
+
+                // Validasi saldo
+                if (amountToWithdraw > totalEarnings) {
+                    Toast.makeText(requireContext(), "Saldo tidak mencukupi untuk penarikan!", Toast.LENGTH_SHORT).show()
+                    return@setPositiveButton
+                }
+
+                // Jika semua valid, proses permintaan
+                processWithdrawalRequest(selectedBank, accountNumber, amountToWithdraw)
+                dialog.dismiss()
+            }
+            .setNegativeButton("Batal", null)
+            .show()
+    }
+
+    // Tambahkan fungsi ini di dalam HomeSellerFragment.kt
+    private fun processWithdrawalRequest(bankName: String, accountNumber: String, amount: Long) {
+        val currentUser = FirebaseHelper.auth.currentUser ?: return
+        val db = FirebaseHelper.firestore
+
+        // Data yang akan disimpan di Firestore
+        val requestData = hashMapOf(
+            "userId" to currentUser.uid,
+            "userName" to (currentUser.displayName ?: "Tanpa Nama"),
+            "amount" to amount,
+            "bankName" to bankName,
+            "accountNumber" to accountNumber,
+            "status" to "pending", // Status awal: menunggu diproses admin
+            "requestedAt" to System.currentTimeMillis()
+        )
+
+        // Simpan ke koleksi 'withdrawalRequests'
+        db.collection("withdrawalRequests")
+            .add(requestData)
+            .addOnSuccessListener {
+                Toast.makeText(requireContext(), "Permintaan penarikan berhasil diajukan.", Toast.LENGTH_LONG).show()
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(requireContext(), "Gagal mengajukan permintaan: ${e.message}", Toast.LENGTH_SHORT).show()
             }
     }
 

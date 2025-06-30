@@ -8,12 +8,14 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.galdanaja.MainActivity
 import com.example.galdanaja.R
 import com.example.galdanaja.databinding.ActivityEndOnBoardingBinding
+import com.example.galdanaja.ui.profile.CreateProfileActivity
 import com.example.galdanaja.ui.register.RegisterActivity
 import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.identity.Identity
 import com.google.android.gms.auth.api.identity.SignInClient
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.firestore.FirebaseFirestore
 
 class EndOnBoardingActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEndOnBoardingBinding
@@ -52,18 +54,14 @@ class EndOnBoardingActivity : AppCompatActivity() {
                     Log.e("GoogleSignIn", "Gagal login dengan Google.", it)
                     Toast.makeText(this, "Gagal login dengan Google.", Toast.LENGTH_SHORT).show()
                 }
-
         }
 
-        // Facebook Button
         binding.facebookButton.setOnClickListener {
-            // Menampilkan Toast dengan pesan "Coming Soon"
             Toast.makeText(this, "Coming Soon", Toast.LENGTH_SHORT).show()
         }
 
-        // Email Button (Jika kamu ingin menambahkan)
         binding.emailButton.setOnClickListener {
-            startActivity(Intent(this, RegisterActivity::class.java)) // Kamu bisa pindah ke RegisterActivity atau LoginActivity
+            startActivity(Intent(this, RegisterActivity::class.java))
         }
     }
 
@@ -72,18 +70,67 @@ class EndOnBoardingActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == GOOGLE_SIGN_IN) {
-            oneTapClient.getSignInCredentialFromIntent(data).googleIdToken?.let { idToken ->
-                val credential = GoogleAuthProvider.getCredential(idToken, null)
-                FirebaseAuth.getInstance().signInWithCredential(credential)
-                    .addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            startActivity(Intent(this, MainActivity::class.java)) // Pindah ke halaman utama setelah login
-                            finish()
-                        } else {
-                            Toast.makeText(this, "Login gagal: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+            try {
+                val credential = oneTapClient.getSignInCredentialFromIntent(data)
+                val idToken = credential.googleIdToken
+                if (idToken != null) {
+                    val firebaseCredential = GoogleAuthProvider.getCredential(idToken, null)
+                    FirebaseAuth.getInstance().signInWithCredential(firebaseCredential)
+                        .addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+                                // Login Firebase berhasil, sekarang cek profilnya di Firestore
+                                val uid = task.result?.user?.uid
+                                if (uid != null) {
+                                    checkProfileAndNavigate(uid) // Panggil fungsi navigasi cerdas
+                                } else {
+                                    Toast.makeText(this, "Gagal mendapatkan UID pengguna.", Toast.LENGTH_SHORT).show()
+                                }
+                            } else {
+                                Toast.makeText(this, "Login gagal: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                            }
                         }
-                    }
-            } ?: Toast.makeText(this, "Gagal ambil token Google", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this, "Gagal mendapatkan token Google", Toast.LENGTH_SHORT).show()
+                }
+            } catch (e: Exception) {
+                Log.e("GoogleSignIn", "Error menangani hasil sign-in", e)
+                Toast.makeText(this, "Terjadi kesalahan saat login.", Toast.LENGTH_SHORT).show()
+            }
         }
+    }
+
+    /**
+     * Fungsi ini mengecek ke Firestore apakah user dengan UID tertentu sudah punya
+     * dokumen profil atau belum, lalu mengarahkan ke halaman yang sesuai.
+     */
+    private fun checkProfileAndNavigate(uid: String) {
+        val db = FirebaseFirestore.getInstance()
+        db.collection("users").document(uid).get()
+            .addOnSuccessListener { document ->
+                if (document.exists()) {
+                    // KASUS 1: Profil sudah ada di Firestore
+                    // Langsung arahkan ke halaman utama
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
+                    finish()
+                } else {
+                    // KASUS 2: Pengguna baru, profil belum ada
+                    // Arahkan ke halaman pembuatan profil
+                    val intent = Intent(this, CreateProfileActivity::class.java)
+
+                    // BONUS: Kirim data dari Google untuk mengisi form secara otomatis
+                    val currentUser = FirebaseAuth.getInstance().currentUser
+                    intent.putExtra("USER_NAME", currentUser?.displayName)
+                    intent.putExtra("USER_PHOTO_URL", currentUser?.photoUrl.toString())
+
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
+                    finish()
+                }
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(this, "Gagal memeriksa profil: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
     }
 }

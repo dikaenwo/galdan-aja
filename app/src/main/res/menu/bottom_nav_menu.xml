@@ -7,11 +7,11 @@
         android:iconTint="@null"
         android:title="" />
 
-    <item
-        android:id="@+id/navigation_explore"
-        android:icon="@drawable/explore_selector"
-        android:iconTint="@null"
-        android:title="" />
+<!--    <item-->
+<!--        android:id="@+id/navigation_explore"-->
+<!--        android:icon="@drawable/explore_selector"-->
+<!--        android:iconTint="@null"-->
+<!--        android:title="" />-->
 
     <item
         android:id="@+id/navigation_favorite"

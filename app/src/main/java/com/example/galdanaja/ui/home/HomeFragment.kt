@@ -28,6 +28,8 @@ class HomeFragment : Fragment() {
     private lateinit var galdanAdapter: GaldanAdapter
     private val productsList = ArrayList<GaldanItem>()
     private var currentCategory: String? = null
+    // Di dalam class HomeSellerFragment
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
