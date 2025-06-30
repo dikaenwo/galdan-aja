@@ -11,4 +11,11 @@
     <color name="typhography5">#363A33</color>
 
     <color name="colorPrimaryChat">#54A312</color>
+
+
+    <color name="seller_green">#54A312</color>
+    <color name="seller_background">#F5F5F5</color>
+    <color name="text_primary">#212121</color>
+    <color name="text_secondary">#757575</color>
+
 </resources>

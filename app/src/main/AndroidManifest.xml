@@ -15,6 +15,9 @@
         android:theme="@style/Theme.GaldanAja"
         tools:targetApi="31">
         <activity
+            android:name=".MainSellerActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.chat.ChatActivity"
             android:exported="false" />
         <activity

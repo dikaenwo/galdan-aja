@@ -7,7 +7,9 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.galdanaja.ActivityInputProduct
+import com.example.galdanaja.MainSellerActivity
 import com.example.galdanaja.R
+import com.example.galdanaja.databinding.ActivityMainSellerBinding
 import com.example.galdanaja.databinding.ActivityProfileBinding
 import com.example.galdanaja.ui.login.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -82,7 +84,7 @@ class ProfileActivity : AppCompatActivity() {
         }
 
         binding.tvPenjual.setOnClickListener {
-            val intent = Intent(this, ActivityInputProduct::class.java)
+            val intent = Intent(this, MainSellerActivity::class.java)
             startActivity(intent)
         }
     }

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/navigation_home"
+    android:id="@+id/mobile_navigation_seller">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.example.galdanaja.penjual.home.HomeSellerFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home_seller"/>
+
+
+<!--    <fragment-->
+<!--        android:id="@+id/navigation_favorite"-->
+<!--        android:name="com.example.galdanaja.ui.chat.ChatFragment"-->
+<!--        android:label="Favorite"-->
+<!--        tools:layout="@layout/fragment_chat"/>-->
+
+    <fragment
+        android:id="@+id/navigation_tambah"
+        android:name="com.example.galdanaja.penjual.tambah.TambahFragment"
+        android:label="Cart"
+        tools:layout="@layout/fragment_tambah"/>
+
+<!--    <fragment-->
+<!--        android:id="@+id/navigation_notification"-->
+<!--        android:name="com.example.galdanaja.ui.notif.NotifFragment"-->
+<!--        android:label="Notification"-->
+<!--        tools:layout="@layout/fragment_notif"/>-->
+
+</navigation>
